@@ -155,7 +155,7 @@ export function DevoteePage() {
       </div>
 
       <Card>
-        <CardHeader title="Courses" subtitle="Open a course to see this devotee’s journey there." />
+        <CardHeader title="Courses" subtitle="Open a course to see this devotee's journey there." />
         {rows.length === 0 ? (
           <p className="text-sm text-muted">Not enrolled in any course you can see.</p>
         ) : (

@@ -16,7 +16,7 @@ An attendance dashboard for devotional study sessions (Bhagavad Gita, Srimad Bha
   - interactive charts: attendance per session (click a bar to filter), average minutes, month by month, a devotee × session heatmap, time-in-call and joining-time distributions, weekday pattern
   - filters that live in the URL, so links are shareable: period, "counts as present" threshold, minimum sessions, minimum streak, segment (Regular / Occasional / New / Lapsed), name search
   - a sortable leaderboard with CSV export
-- **Devotee profile:** session timeline (bars or line), streaks, milestones (1, 10, 25, 50, 108…), monthly breakdown, and a consistency signal.
+- **Devotee profile:** session timeline (bars or line), streaks, milestones (1, 10, 25, 50, 108...), monthly breakdown, and a consistency signal.
 - **Upload:**
   - Drop one or many Meet attendance CSVs. They are **parsed in the browser**; only names, join times and minutes are sent, and the file itself is never uploaded or stored.
   - The course is detected automatically from the meeting code.
@@ -168,7 +168,7 @@ First restrict the environment to `main`: **Settings → Environments → produc
 #### `BACKUP_AGE_PUBLIC_KEY`
 
 1. Install [age](https://github.com/FiloSottile/age) and run `age-keygen -o backup-key.txt`.
-2. Save the printed public key (starts with `age1…`; it isn't secret) as a `production` environment secret named `BACKUP_AGE_PUBLIC_KEY` (`gh secret set BACKUP_AGE_PUBLIC_KEY --env production -R <owner>/<repo>`).
+2. Save the printed public key (starts with `age1...`; it isn't secret) as a `production` environment secret named `BACKUP_AGE_PUBLIC_KEY` (`gh secret set BACKUP_AGE_PUBLIC_KEY --env production -R <owner>/<repo>`).
 3. Keep `backup-key.txt` offline (password manager or an encrypted drive). It's the only way to decrypt backups, and it must never be committed.
 
 The **Encrypted database backup** workflow then runs weekly and keeps 90 days of artifacts. To restore: download the artifact, run `age -d -i backup-key.txt backup-*.tar.gz.age | tar xz`, then `psql "<connection-string>" -f schema.sql -f data.sql`.

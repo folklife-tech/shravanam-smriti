@@ -63,7 +63,7 @@ export function ParticipantsAdminPage() {
             </Select>
           </Field>
           <Field label="Search">
-            <Input type="search" placeholder="Name or alias…" value={q} onChange={(e) => setQ(e.target.value)} />
+            <Input type="search" placeholder="Name or alias..." value={q} onChange={(e) => setQ(e.target.value)} />
           </Field>
           <div className="flex items-end">
             <Button variant="primary" disabled={picked.length !== 2} onClick={() => setKeep(picked[0])} className="w-full">
@@ -138,7 +138,7 @@ export function ParticipantsAdminPage() {
                     <div className="mt-1 flex flex-wrap gap-1">
                       {p.aliases.map((a) => (
                         <span key={a} className="inline-flex items-center gap-1 rounded-md bg-surface-2 px-2 py-0.5 text-xs text-ink-2">
-                          aka “{a}”
+                          aka "{a}"
                           <button aria-label={`Detach alias ${a}`} title="Detach: future uploads with this spelling become a separate person" className="hover:text-danger" onClick={() => unalias.mutate(a)}>
                             ✕
                           </button>

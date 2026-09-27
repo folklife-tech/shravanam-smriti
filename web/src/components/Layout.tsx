@@ -57,7 +57,7 @@ export function Layout() {
       </main>
       <footer className="border-t border-line py-6 text-center text-xs text-muted">
         <p className="font-display text-sm italic text-ink-2">
-          “Their minds fixed on Me, they enlighten one another and delight in speaking of Me.”
+          "Their minds fixed on Me, they enlighten one another and delight in speaking of Me."
         </p>
         <p className="mt-1">Bhagavad Gita 10.9</p>
       </footer>

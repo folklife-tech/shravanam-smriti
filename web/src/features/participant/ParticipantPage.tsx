@@ -87,7 +87,7 @@ export function ParticipantPage() {
   if (isLoading || dash.isLoading) return <Spinner />
   if (dash.error) return <ErrorBox error={dash.error} />
   if (!course || !d) return <Empty title="Course not found" />
-  if (!p) return <Empty title="No attendance for this devotee in this course">They may be below the “present” threshold or merged into another name.</Empty>
+  if (!p) return <Empty title="No attendance for this devotee in this course">They may be below the "present" threshold or merged into another name.</Empty>
 
   const recent = tl.slice(-12)
   const recentRate = recent.length ? Math.round((recent.filter((x) => x.present).length / recent.length) * 100) : 0

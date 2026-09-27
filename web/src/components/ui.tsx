@@ -89,7 +89,7 @@ export function Badge({ tone = 'neutral', children }: { tone?: keyof typeof badg
   return <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${badgeTones[tone]}`}>{children}</span>
 }
 
-export function Spinner({ label = 'Loading…' }: { label?: string }) {
+export function Spinner({ label = 'Loading...' }: { label?: string }) {
   return (
     <div className="flex items-center gap-3 py-10 text-sm text-muted" role="status">
       <span className="h-4 w-4 animate-spin rounded-full border-2 border-line border-t-brand" />

@@ -107,7 +107,7 @@ export function CourseEditPage() {
             }
             actions={
               <Button variant="danger" disabled={course.status !== 'archived'} onClick={() => setConfirmDelete(true)}>
-                Delete…
+                Delete...
               </Button>
             }
           />

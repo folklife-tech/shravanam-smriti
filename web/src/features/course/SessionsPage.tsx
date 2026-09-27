@@ -37,7 +37,7 @@ export function SessionsPage() {
             ← {course.name}
           </Link>
           <h1 className="mt-1 font-display text-4xl font-semibold text-ink">Sessions</h1>
-          <p className="mt-1 text-sm text-muted">Every uploaded session. Replace a day’s file or remove it entirely.</p>
+          <p className="mt-1 text-sm text-muted">Every uploaded session. Replace a day's file or remove it entirely.</p>
         </div>
         <Link to={`/upload?course=${course.id}`}>
           <Button variant="primary">Upload</Button>
@@ -77,7 +77,7 @@ export function SessionsPage() {
                       {fmtDate(s.session_date)} {s.seq > 1 && <Badge tone="saffron">session {s.seq}</Badge>}
                     </td>
                     <td className="px-4 py-2.5 text-ink-2">
-                      {fmtTime(s.started_at, course.timezone)}–{fmtTime(s.ended_at, course.timezone)} · {fmtDuration(s.duration_sec)}
+                      {fmtTime(s.started_at, course.timezone)}-{fmtTime(s.ended_at, course.timezone)} · {fmtDuration(s.duration_sec)}
                     </td>
                     <td className="px-4 py-2.5 text-right">{s.rows}</td>
                     <td className="px-4 py-2.5 text-ink-2">{s.meeting_code ?? '-'}</td>
@@ -139,7 +139,7 @@ export function SessionsPage() {
           <>
             <Button onClick={() => setToDelete(null)}>Cancel</Button>
             <Button variant="danger" disabled={del.isPending} onClick={() => toDelete && del.mutate(toDelete.id)}>
-              {del.isPending ? 'Deleting…' : 'Delete session'}
+              {del.isPending ? 'Deleting...' : 'Delete session'}
             </Button>
           </>
         }

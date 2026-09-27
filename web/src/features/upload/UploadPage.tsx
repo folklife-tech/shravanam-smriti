@@ -74,7 +74,7 @@ export function UploadPage() {
         {replaceId && replaceSession.data && (
           <p className="mt-3 rounded-xl border border-line bg-surface-2 px-4 py-2 text-sm text-ink-2">
             Replacing the session on <strong>{fmtDate(replaceSession.data.session_date)}</strong> ({replaceSession.data.rows} rows,
-            uploaded {fmtDateTime(replaceSession.data.uploaded_at)}). The new file’s rows will take its place.
+            uploaded {fmtDateTime(replaceSession.data.uploaded_at)}). The new file's rows will take its place.
           </p>
         )}
       </div>
@@ -183,7 +183,7 @@ function UploadCard({
   })
 
   const tz = course?.timezone
-  const at = (s: SessionRecord) => `${fmtTime(s.started_at, tz)}–${fmtTime(s.ended_at, tz)}`
+  const at = (s: SessionRecord) => `${fmtTime(s.started_at, tz)}-${fmtTime(s.ended_at, tz)}`
   // Sessions that day (other than the one being replaced). Only a session whose
   // time overlaps this file is the "same" session; others are separate classes.
   const sameDay = (preview.data?.existing ?? []).filter((s) => s.id !== replaceTarget?.id)
@@ -259,7 +259,7 @@ function UploadCard({
             {m.fileName}
           </p>
           <p className="mt-0.5 text-sm text-muted">
-            {fmtDate(m.sessionDate)} · {fmtClock(m.startedAt)}–{fmtClock(m.endedAt)} · {fmtDuration(m.durationSec)} ·{' '}
+            {fmtDate(m.sessionDate)} · {fmtClock(m.startedAt)}-{fmtClock(m.endedAt)} · {fmtDuration(m.durationSec)} ·{' '}
             {uniqueNames.length} people{m.meetingCode ? ` · ${m.meetingCode}` : ''}
           </p>
         </div>
@@ -271,7 +271,7 @@ function UploadCard({
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <Field label="Course" hint={codeKnown ? 'Matched by meeting code' : undefined}>
           <Select value={courseId} onChange={(e) => setCourseId(e.target.value)} disabled={Boolean(replaceTarget)}>
-            <option value="">Choose a course…</option>
+            <option value="">Choose a course...</option>
             {courses.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
@@ -312,7 +312,7 @@ function UploadCard({
       {blockedReplace && (
         <div className="mt-4">
           <ErrorBox
-            error={`This file (${fmtClock(m.startedAt)}–${fmtClock(m.endedAt)}) overlaps a different session (${overlapping.map(at).join(', ')}). Replace that session instead, or upload the file normally.`}
+            error={`This file (${fmtClock(m.startedAt)}-${fmtClock(m.endedAt)}) overlaps a different session (${overlapping.map(at).join(', ')}). Replace that session instead, or upload the file normally.`}
           />
         </div>
       )}
@@ -331,7 +331,7 @@ function UploadCard({
             ))}
             <div className="rounded-lg bg-surface px-3 py-2">
               <span className="font-medium text-ink">
-                This file {fmtClock(m.startedAt)}–{fmtClock(m.endedAt)}:
+                This file {fmtClock(m.startedAt)}-{fmtClock(m.endedAt)}:
               </span>{' '}
               {m.rows.length} rows · {fmtDuration(m.durationSec)}
             </div>
@@ -400,12 +400,12 @@ function UploadCard({
       )}
 
       <div className="mt-5 flex items-center justify-end gap-3">
-        {preview.isFetching && <span className="text-xs text-muted">Checking…</span>}
+        {preview.isFetching && <span className="text-xs text-muted">Checking...</span>}
         {choice === 'skip' ? (
           <Button onClick={onRemove}>Remove from list</Button>
         ) : (
           <Button variant="primary" disabled={!canSubmit} onClick={submit}>
-            {busy ? 'Saving…' : replaceTarget || choice === 'replace' ? 'Replace session' : 'Import'}
+            {busy ? 'Saving...' : replaceTarget || choice === 'replace' ? 'Replace session' : 'Import'}
           </Button>
         )}
       </div>
