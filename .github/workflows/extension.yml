@@ -1,0 +1,42 @@
+name: Build Chrome extension
+
+# Builds the store-ready zip from main. Download it from the run's artifacts
+# and upload it in the Chrome Web Store developer dashboard.
+on:
+  push:
+    branches: [main]
+    paths: ['extension/**', '.github/workflows/extension.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extension
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: extension/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Build zip
+        run: npm run zip
+        env:
+          # Public values, the same repository variables the web app uses.
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+          APP_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chrome-extension
+          path: extension/shravanam-smriti-extension-*.zip
+          retention-days: 90

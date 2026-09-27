@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self'" />
+    <title>Privacy - Shravanam Smriti</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif; color: #16203a; background: #f7f3e9; }
+      @media (prefers-color-scheme: dark) { body { color: #f4f1e8; background: #0b1222; } a { color: #6ea8f0; } }
+      h1 { font-size: 1.9rem; margin-bottom: 0.2rem; }
+      h2 { font-size: 1.15rem; margin-top: 2rem; }
+      .muted { opacity: 0.7; }
+      li { margin: 0.3rem 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Privacy policy</h1>
+    <p class="muted">Shravanam Smriti web app and the "Shravanam Smriti Attendance" Chrome extension. Last updated 27 September 2026.</p>
+
+    <p>
+      Shravanam Smriti helps the organisers of study courses see who attends their Google Meet sessions. It is used only by
+      administrators whom a course organiser has added. This page explains what it collects and where that goes.
+    </p>
+
+    <h2>What the extension collects</h2>
+    <ul>
+      <li><strong>Meeting participants' display names</strong>, as shown by Google Meet in the People list and on video tiles, while the administrator using the extension is in a call.</li>
+      <li><strong>When each participant was first seen and how long they were present</strong>, measured by checking the call every few seconds.</li>
+      <li><strong>The meeting code</strong> (for example <code>abc-defg-hij</code>) and the meeting's start and end times.</li>
+      <li><strong>The administrator's sign-in</strong> (their Google account email, handled by the sign-in provider) so uploads can be checked against their permissions.</li>
+    </ul>
+    <p>
+      It does not collect audio, video, chat messages, screen contents, email addresses of participants, browsing history, or
+      anything from sites other than Google Meet.
+    </p>
+
+    <h2>Where the data goes</h2>
+    <ul>
+      <li>During a meeting, attendance is kept only in the administrator's browser (extension storage).</li>
+      <li>When the meeting ends, it is sent to the course organiser's own Shravanam Smriti database and nowhere else. No data is sent to the extension's developers or any other third party.</li>
+      <li>In the database, attendance is visible only to administrators with access to that course. Access is enforced by the database itself.</li>
+      <li>Data is never sold, never used for advertising, and never used to decide creditworthiness or for any purpose unrelated to course attendance.</li>
+    </ul>
+
+    <h2>Keeping and deleting data</h2>
+    <ul>
+      <li>The extension keeps a short list of recent meetings in the browser so their status can be shown. Removing the extension deletes it.</li>
+      <li>Course organisers can delete any uploaded session in the web app at any time, and remove people's records by deleting the sessions they appear in.</li>
+      <li>If you attended a session and want your record removed, ask the organiser of that course.</li>
+    </ul>
+
+    <h2>Web app</h2>
+    <p>
+      The web app shows the same attendance data to signed-in administrators. Attendance files uploaded through it are read in the
+      browser; only names, join times and minutes are sent to the database, and the file itself is not stored. The web app does not
+      use analytics or advertising trackers.
+    </p>
+
+    <h2>Contact</h2>
+    <p>Questions about a course's data should go to that course's organiser, who controls the database it is stored in.</p>
+  </body>
+</html>
