@@ -148,7 +148,7 @@ export function CourseForm({
             }}
           />
         </Field>
-        <Field label="Schedule" hint="Shown under the name, e.g. “Daily, 8:30 PM”">
+        <Field label="Schedule" hint="Shown under the name, e.g. 'Daily, 8:30 PM'">
           <Input maxLength={200} value={d.schedule_note} onChange={(e) => set('schedule_note', e.target.value)} />
         </Field>
         <Field label="Status">
@@ -190,16 +190,16 @@ export function CourseForm({
         <Field label="Counts as present after (minutes)" hint="Shorter visits are ignored in stats. Applies to past sessions too.">
           <Input type="number" min={0} max={600} value={d.min_present_minutes} onChange={(e) => set('min_present_minutes', Number(e.target.value))} />
         </Field>
-        <Field label="Regular devotee threshold (%)" hint="Attendance rate needed to be labelled “Regular”.">
+        <Field label="Regular devotee threshold (%)" hint="Attendance rate needed to be labelled 'Regular'.">
           <Input type="number" min={1} max={100} value={d.regular_threshold_pct} onChange={(e) => set('regular_threshold_pct', Number(e.target.value))} />
         </Field>
       </div>
       <FieldGroup label="Host accounts" hint="Names excluded from stats (e.g. the shared host login). Press Enter to add.">
-        <ChipsInput values={d.host_names} onChange={(v) => set('host_names', v)} placeholder="Add a name…" ariaLabel="Add a host account name" />
+        <ChipsInput values={d.host_names} onChange={(v) => set('host_names', v)} placeholder="Add a name..." ariaLabel="Add a host account name" />
       </FieldGroup>
       <div className="flex justify-end">
         <Button type="submit" variant="primary" disabled={busy}>
-          {busy ? 'Saving…' : submitLabel}
+          {busy ? 'Saving...' : submitLabel}
         </Button>
       </div>
     </form>

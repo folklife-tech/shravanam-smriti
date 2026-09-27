@@ -165,7 +165,7 @@ export function CoursePage() {
               <option value="90d">Last 90 days</option>
               <option value="month">This month</option>
               <option value="year">This year</option>
-              <option value="custom">Custom…</option>
+              <option value="custom">Custom...</option>
             </Select>
           </Field>
           {preset === 'custom' && (
@@ -195,7 +195,7 @@ export function CoursePage() {
             <Input type="number" min={0} value={f.get('st')} placeholder="0" onChange={(e) => f.set({ st: e.target.value })} />
           </Field>
           <Field label="Search">
-            <Input type="search" placeholder="Name…" value={f.get('q')} onChange={(e) => f.set({ q: e.target.value })} />
+            <Input type="search" placeholder="Name..." value={f.get('q')} onChange={(e) => f.set({ q: e.target.value })} />
           </Field>
         </div>
         <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -277,7 +277,7 @@ function DashboardBody({
   return (
     <div className={`space-y-6 transition-opacity ${fetching ? 'opacity-60' : ''}`}>
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
-        <Kpi label="Sessions" value={d.sessions.length} sub={`${fmtDate(d.sessions[0].date)} – ${fmtDate(d.sessions[d.sessions.length - 1].date)}`} />
+        <Kpi label="Sessions" value={d.sessions.length} sub={`${fmtDate(d.sessions[0].date)} - ${fmtDate(d.sessions[d.sessions.length - 1].date)}`} />
         <Kpi label="Devotees" value={people.length} sub={people.length !== d.participants.length ? `of ${d.participants.length} in period` : 'attended at least once'} />
         <Kpi label="Avg per session" value={(totalHeadcount / d.sessions.length).toFixed(1)} sub={`present ≥ ${d.min_minutes} min`} />
         <Kpi label="Avg time in call" value={fmtDuration(avgSeconds)} sub={`${fmtHours(totalSeconds)} of hearing in total`} />

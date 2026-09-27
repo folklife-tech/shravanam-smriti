@@ -1,0 +1,34 @@
+<!doctype html>
+<!-- A simplified stand-in for a Google Meet call page, using the attributes the
+     extractor relies on. Names are synthetic. -->
+<html>
+  <body>
+    <div class="tiles">
+      <div data-participant-id="spaces/a/devices/1">
+        <div data-self-name="Radhika Iyer"></div>
+        <div class="notranslate">You</div>
+      </div>
+      <div data-participant-id="spaces/a/devices/2"><div class="notranslate">Arjun Mehta</div></div>
+      <div data-participant-id="spaces/a/devices/3"><div class="notranslate">Arjun Mehta (Presentation)</div></div>
+      <div data-participant-id="spaces/a/devices/4"><div class="notranslate">Keshav Nair is presenting</div></div>
+    </div>
+
+    <aside>
+      <div role="list" aria-label="Participants">
+        <div role="listitem" aria-label="Radhika Iyer (You)"><img alt="" /><span>Radhika Iyer (You)</span></div>
+        <div role="listitem" aria-label="Arjun Mehta"><img alt="" /><span>Arjun Mehta</span></div>
+        <div role="listitem" aria-label="Govind  Patel"><img alt="" /><span>Govind Patel</span></div>
+        <div role="listitem" aria-label="Keshav Nair (Meeting host)"><img alt="" /><span>Keshav Nair</span></div>
+      </div>
+      <!-- chat messages are list items too, but have no avatar image -->
+      <div role="list" aria-label="Chat">
+        <div role="listitem" aria-label="Hare Krishna everyone!"><span>Hare Krishna everyone!</span></div>
+      </div>
+    </aside>
+
+    <div class="controls">
+      <button aria-label="Show everyone"></button>
+      <button aria-label="Leave call"></button>
+    </div>
+  </body>
+</html>

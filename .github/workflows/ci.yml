@@ -26,6 +26,28 @@ jobs:
       - run: npm test
       - run: npx oxlint src
 
+  extension:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extension
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: extension/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Build (placeholder config; only checks that it bundles)
+        run: npm run build
+        env:
+          SUPABASE_URL: https://example.supabase.co
+          SUPABASE_ANON_KEY: ci-placeholder
+          APP_URL: https://example.github.io/app/
+
   database:
     runs-on: ubuntu-latest
     steps:

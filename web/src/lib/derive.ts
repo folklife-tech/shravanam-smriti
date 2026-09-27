@@ -40,7 +40,7 @@ export function segmentCounts(ps: ParticipantStat[]): Record<Segment, number> {
 /** Histogram over fixed-width bins; the last bin is open-ended. */
 export function histogram(values: number[], binSize: number, maxBins: number): { label: string; count: number }[] {
   const bins = Array.from({ length: maxBins }, (_, i) => ({
-    label: i === maxBins - 1 ? `${i * binSize}+` : `${i * binSize}–${(i + 1) * binSize}`,
+    label: i === maxBins - 1 ? `${i * binSize}+` : `${i * binSize}-${(i + 1) * binSize}`,
     count: 0,
   }))
   for (const v of values) bins[Math.min(Math.floor(v / binSize), maxBins - 1)].count++
@@ -49,9 +49,9 @@ export function histogram(values: number[], binSize: number, maxBins: number): {
 
 export const JOIN_BUCKETS = [
   { label: 'On time', max: 120 },
-  { label: '2–5 min', max: 300 },
-  { label: '5–10 min', max: 600 },
-  { label: '10–20 min', max: 1200 },
+  { label: '2-5 min', max: 300 },
+  { label: '5-10 min', max: 600 },
+  { label: '10-20 min', max: 1200 },
   { label: '20+ min', max: Infinity },
 ]
 

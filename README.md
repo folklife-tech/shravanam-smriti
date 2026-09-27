@@ -16,7 +16,8 @@ An attendance dashboard for devotional study sessions (Bhagavad Gita, Srimad Bha
   - interactive charts: attendance per session (click a bar to filter), average minutes, month by month, a devotee × session heatmap, time-in-call and joining-time distributions, weekday pattern
   - filters that live in the URL, so links are shareable: period, "counts as present" threshold, minimum sessions, minimum streak, segment (Regular / Occasional / New / Lapsed), name search
   - a sortable leaderboard with CSV export
-- **Devotee profile:** session timeline (bars or line), streaks, milestones (1, 10, 25, 50, 108…), monthly breakdown, and a consistency signal.
+- **Devotee profile:** session timeline (bars or line), streaks, milestones (1, 10, 25, 50, 108...), monthly breakdown, and a consistency signal.
+- **Chrome extension for Google Meet:** counts who attends while you host a call and saves it to your own database when the meeting ends. No third-party service and no CSV step. See [Chrome extension](#chrome-extension).
 - **Upload:**
   - Drop one or many Meet attendance CSVs. They are **parsed in the browser**; only names, join times and minutes are sent, and the file itself is never uploaded or stored.
   - The course is detected automatically from the meeting code.
@@ -168,7 +169,7 @@ First restrict the environment to `main`: **Settings → Environments → produc
 #### `BACKUP_AGE_PUBLIC_KEY`
 
 1. Install [age](https://github.com/FiloSottile/age) and run `age-keygen -o backup-key.txt`.
-2. Save the printed public key (starts with `age1…`; it isn't secret) as a `production` environment secret named `BACKUP_AGE_PUBLIC_KEY` (`gh secret set BACKUP_AGE_PUBLIC_KEY --env production -R <owner>/<repo>`).
+2. Save the printed public key (starts with `age1...`; it isn't secret) as a `production` environment secret named `BACKUP_AGE_PUBLIC_KEY` (`gh secret set BACKUP_AGE_PUBLIC_KEY --env production -R <owner>/<repo>`).
 3. Keep `backup-key.txt` offline (password manager or an encrypted drive). It's the only way to decrypt backups, and it must never be committed.
 
 The **Encrypted database backup** workflow then runs weekly and keeps 90 days of artifacts. To restore: download the artifact, run `age -d -i backup-key.txt backup-*.tar.gz.age | tar xz`, then `psql "<connection-string>" -f schema.sql -f data.sql`.
@@ -198,6 +199,39 @@ Super admins manage access from **Users** in the app. Nobody needs database acce
 - **Recent changes:** every grant, role change, course change and removal, with who made it and when.
 
 Guard rails: you can't demote or remove yourself, so there is always at least one super admin, and every change is checked by the database, not just the page.
+
+## Chrome extension
+
+`extension/` is a Chrome (Manifest V3) extension that replaces third-party Meet attendance extensions.
+
+**How it works**
+- While you're in a Google Meet call, it reads participants' names from Meet's People list (and video tiles) every 5 seconds, and counts each person's first-seen time and time in call. Progress is saved in the browser after every check, so a crash or reload loses nothing.
+- When you leave the call or close the tab, it saves the attendance to your Supabase database as you, through the same `ingest_session` function as CSV uploads. So course access, host exclusion and same-time session matching all apply.
+  - The meeting code picks the course. For a new code, the popup asks which course, and can remember it.
+  - If a session at that time already exists (for example a co-host also recorded it), the popup offers **Replace it**, **Keep both** or **Discard**.
+  - If you're offline or signed out, it keeps the record and retries.
+- The toolbar popup shows your sign-in, a live count with names (so you can check it's working in your Meet), recent meetings, and a CSV download in the same layout the web app imports.
+- Only the extension's own pages can trigger sign-in, uploads or deletions; the Meet page can only report attendance checks.
+
+**Local development**
+1. `make dev`, so the local Supabase and web app are running.
+2. `make ext` builds a development version into `extension/dist` against local Supabase.
+3. In Chrome, open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and choose `extension/dist`.
+4. Open the extension's popup and use **Sign in (demo)**. That button exists only in development builds.
+
+Tests: `make ext-test` covers the attendance logic, the Meet page reading (against a Meet-like page fixture), times and CSV output.
+
+**Publishing to the Chrome Web Store**
+1. Register as a Chrome Web Store developer (one-time US$5) at [chrome.google.com/webstore/devconsole](https://chrome.google.com/webstore/devconsole).
+2. Build the zip: **Actions → Build Chrome extension → Run workflow** on `main`, then download the `chrome-extension` artifact. It runs automatically when `extension/` changes on `main`. It uses the `SUPABASE_URL` and `SUPABASE_ANON_KEY` repository variables, and links to your GitHub Pages site. Locally: `SUPABASE_URL=... SUPABASE_ANON_KEY=... APP_URL=<site-url> make ext-zip`.
+3. In the developer dashboard, create a new item and upload the zip. Fill in the listing and privacy tabs from [`extension/STORE.md`](extension/STORE.md). The privacy policy is served at `<site-url>privacy.html`. Choose **Unlisted** visibility, or **Private** if all admins share a Google Workspace domain.
+4. After the first upload, add `https://<item-id>.chromiumapp.org/` to Supabase **Authentication → URL Configuration → Redirect URLs**, so Google sign-in works in the extension.
+5. For updates, bump `version` in `extension/package.json`, merge, and upload the new zip. Installed copies update automatically after review.
+
+**Limits**
+- Google Meet's page structure is undocumented and can change. The code that reads it is isolated in `extension/src/content/extract.ts`, with a test fixture. The popup's live count is the quickest check after a Meet update.
+- For a complete count in large calls, keep Meet's People list open. The extension opens it automatically by default; video tiles alone only show some participants.
+- It relies on Meet's English labels for a few buttons ("Leave call", "People"). Names are read either way, but automatic People-list opening may not work in other UI languages.
 
 ## Security notes
 

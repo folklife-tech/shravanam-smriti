@@ -26,7 +26,7 @@ function Shell({ children }: { children: ReactNode }) {
   )
 }
 
-/** OAuth failures (e.g. the sign-up hook rejecting an email) come back as ?error_description=… */
+/** OAuth failures (e.g. the sign-up hook rejecting an email) come back as ?error_description=... */
 function redirectError(): Error | null {
   const params = new URLSearchParams(window.location.search || window.location.hash.replace(/^#\/?\??/, ''))
   const msg = params.get('error_description')
@@ -117,7 +117,7 @@ export function NoAccessPage() {
     <Shell>
       <p className="text-ink">Hare Krishna!</p>
       <p className="mt-2 text-sm text-ink-2">
-        <strong>{session?.user.email}</strong> doesn’t have access yet. Please ask an administrator to add your email.
+        <strong>{session?.user.email}</strong> doesn't have access yet. Please ask an administrator to add your email.
       </p>
       <Button className="mt-5" onClick={signOut}>
         Sign out

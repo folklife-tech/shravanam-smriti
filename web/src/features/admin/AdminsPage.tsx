@@ -166,7 +166,7 @@ export function AdminsPage() {
           <div className="flex flex-wrap items-center justify-end gap-3">
             {role === 'course_admin' && inviteCourses.length === 0 && <span className="text-xs text-muted">No courses ticked: they will see nothing until you add some.</span>}
             <Button type="submit" variant="primary" disabled={invite.isPending || !email.trim()}>
-              {invite.isPending ? 'Saving…' : 'Grant access'}
+              {invite.isPending ? 'Saving...' : 'Grant access'}
             </Button>
           </div>
         </form>
@@ -204,7 +204,7 @@ export function AdminsPage() {
                       inviteRef.current?.focus()
                     }}
                   >
-                    Grant access…
+                    Grant access...
                   </Button>
                   <Button size="sm" variant="ghost" onClick={() => setConfirm({ kind: 'dismiss', email: r.email })}>
                     Dismiss
@@ -225,7 +225,7 @@ export function AdminsPage() {
               {counts.super} super admin{counts.super === 1 ? '' : 's'} · {counts.course} course admin{counts.course === 1 ? '' : 's'}
             </p>
           </div>
-          <Input type="search" placeholder="Search email…" value={q} onChange={(e) => setQ(e.target.value)} className="!w-64" />
+          <Input type="search" placeholder="Search email..." value={q} onChange={(e) => setQ(e.target.value)} className="!w-64" />
         </div>
         <ul className="mt-4 divide-y divide-[var(--line)]">
           {list.map((a) => {
@@ -338,7 +338,7 @@ export function AdminsPage() {
         )}
         {confirm?.kind === 'dismiss' && (
           <p>
-            <strong>{confirm.email}</strong>’s sign-in will be deleted. They haven’t been given access to anything.
+            <strong>{confirm.email}</strong>'s sign-in will be deleted. They haven't been given access to anything.
           </p>
         )}
         {confirm?.kind === 'promote' && (

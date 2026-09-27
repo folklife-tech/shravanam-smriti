@@ -164,7 +164,7 @@ function Analytics({ data, selected, periodStart }: { data: OverviewData; select
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
         <Kpi label="Courses" value={k.courses} />
-        <Kpi label="Sessions" value={k.sessions} sub={`${fmtDate(sessions[0][2])} – ${fmtDate(latestDate)}`} />
+        <Kpi label="Sessions" value={k.sessions} sub={`${fmtDate(sessions[0][2])} - ${fmtDate(latestDate)}`} />
         <Kpi label="Devotees" value={k.devotees} sub="attended at least once" />
         <Kpi label="Avg per session" value={k.avgPerSession.toFixed(1)} />
         <Kpi label="Hearing" value={fmtHours(k.seconds)} sub={`${fmtDuration(k.avgSecondsPerVisit)} per visit`} />
